@@ -1,0 +1,79 @@
+simple
+
+2015 run 620C hf1=20,000 BTU/sq.ft-hr; k=1; weston plant spallation 100h shutdown;  Tr,m=Tr,ox=Thigh; T_oxide_growth=Tos; 4 year duration; 40% Fe3O4; 40% (Fe,Cr)3O4; 20% Fe2O3; 347H alloy; oxide growth FY2010 Ian Wright = Denmark Data; general. plain str; two ox layers; ox induced stress; interf interf growth
+
+t91
+
+&OXIDE_GROWTH
+
+   growth_induce_stress = 'no',
+   pbr_bernstein_factor = 0.1,
+   lateral_ox_strain_length = 5.0e+5,
+
+&BOILER
+
+   tube_outer_radius = 0.02225,
+   tube_thickness = 0.00775, 
+
+   htc_tube_inner = 3000.0,
+   htc_tube_outer = 100.0,
+
+   time_low_load = 21.0,
+   time_full2low_load = 1.0,
+   time_full_load = 145.0,
+   time_low2full_load = 1.0,
+
+   steam_temperature_low_load = 620.0,
+   heat_flux_fraction_low_load = -0.999,
+   furnace_temperature_low_load = 1310.0,
+   pressure_steam_low_load = 243.0e-1,
+   pressure_furnace_low_load = 1.0e-1,
+
+   number_load_cycles = 880,
+   cycle_number_output_full2low = 4, 20, 69, 264, 587, 1048, 14*0.0,
+
+   steam_temperature_full_load = 620.0,
+   furnace_temperature_full_load = 1310.0,
+   pressure_steam_full_load = 243.0e-1,
+   pressure_furnace_full_load = 1.0e-1,
+
+   outage_time_interval = 7920.0,
+   time_outage_duration = 20.0,
+   time_full2outage = 100.0,
+   time_outage2full = 6.0,
+   steam_temperature_outage = 25.0,
+   furnace_temperature_outage = 25.0,
+   pressure_steam_outage = 1.0e-1,
+   pressure_furnace_outage = 1.0e-1,
+
+   end_state_boiler = 'partial_load',
+
+/
+
+&SOLVER
+
+  creep_oxide_scale = 'no',
+  creep_metal = 'no',
+ 
+&OUTPUT
+
+  strain_output_file = 'strain_t91_14r3fk.txt',
+  energy_output_file = 'energy_t91_14r3fk.txt',
+  outage_output_file = 'outage_t91_14r3fk.txt',
+  stress_output_file = 'none',
+  general_data_file = 'run_t91_14r3fk.txt',
+  
+/
+
+&FILENAMES
+
+  metal_property_file = 't91_input_jap94.txt',
+  magnetite_property_file = 'fe3o4_input1k.txt',
+  hematite_property_file = 'fe2o3_input1k.txt',
+  spinel_property_file = 'fecr3o4_input1k.txt',
+  oxide_growth_file = 'oxide_growth_input3_t91.txt',
+  damage_map_file = 'damage_input.txt',  
+  oxide_layers_file = 'oxide_layer_input2.txt',
+  solver_options_file = 'solver_input2week.txt',
+
+/

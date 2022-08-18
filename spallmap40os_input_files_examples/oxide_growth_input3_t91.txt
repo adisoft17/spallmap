@@ -1,0 +1,14 @@
+   activ_energy_oxide = 198.987,
+   const_energy_oxide = 10.0e+11,
+
+   oxide_thick_units = 'micron',
+   const_energy_units = 'kJ/mole',
+   oxide_rate_units = 'micron2_hour',
+
+   if_th_oxide_growth = .false.,
+   if_th_tube = .false.,
+   if_exclude_th_strain_trace = .true.,
+
+   pilling_bedworth_ratio = 2.0,
+
+ /

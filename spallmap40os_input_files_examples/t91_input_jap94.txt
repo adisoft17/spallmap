@@ -1,0 +1,27 @@
+ &PROPERTY
+
+  material_name = 'tube',
+
+  Youngs_modul_mat = 1.65e+5, 1.65e+5,
+  Youngs_temp_mat = 20.0, 700.0,
+  poisson_ratio_mat = 0.3,
+
+  th_exp_coeff_mat = 9.8000e-06, 1.0090e-05, 1.0542e-05, 1.1047e-05, 1.1373e-05, 1.1586e-05, 1.1743e-05, 1.1890e-05, 1.2065e-05, 1.2291e-05, 1.2578e-05, 1.2915e-05, 1.3275e-05, 1.3610e-05,
+  th_exp_temp_mat =     0.0,    50.0,   100.0,   150.0,   200.0,   250.0,    300.0,   350.0,   400.0,   450.0,   500.0,   550.0,   600.0,   650.0,
+
+  rho_mat = 10.0,
+  cond_value_mat = 30.0, 30.0,
+  cond_temp_mat = 20.0, 1300.0,
+
+  Temp_creep_onset_mat = 400.0,
+  creep_const_mat = 2.04156,
+  creep_activation_energy_mat = 2429.1321,
+  creep_exponent_mat = 0.0,
+
+  rupture_time_exp_mat = -1.15483,
+  rupture_time_c1_mat = -33.1803,
+  rupture_time_t1_mat = 2.67947e+4,
+  rupture_time_t1s1_mat = 1.4058e+4,
+  rupture_time_t1s2_mat = -5.46172e+3,
+
+ /

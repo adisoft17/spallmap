@@ -1,0 +1,28 @@
+ &OXIDE_LAYER
+  
+   layer_name = 'T91',
+   layer_materials_name = 'tube',
+
+ /
+
+ &OXIDE_LAYER
+  
+   layer_name = 'spinel',
+   layer_materials_name = '(Fe,Cr)3O4',
+   growth_ox_location = 'interface',
+   growth_ox_temperature = 'inner_surface',
+   thickness_growth_fr = 0.5,
+   oxidation_strain_mode = 'radial_lateral_hoop_axial',
+
+ /
+
+ &OXIDE_LAYER
+  
+   layer_name = 'magnetite',
+   layer_materials_name = 'Fe3O4',
+   growth_ox_location = 'interface',
+   growth_ox_temperature = 'outer_surface',
+   thickness_growth_fr = 0.5,
+   oxidation_strain_mode = 'radial_lateral_hoop_axial',
+
+ /

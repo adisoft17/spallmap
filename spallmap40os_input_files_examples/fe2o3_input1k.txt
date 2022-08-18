@@ -1,0 +1,24 @@
+ &PROPERTY
+
+  material_name = 'Fe2O3',
+
+  Youngs_modul_mat = 12.0e+4, 12.0e+4,
+  Youngs_temp_mat = 10.0, 1000.0,
+  poisson_ratio_mat = 0.19,
+
+  surf_fracture_energy_mat = 6.0,
+  fracture_toughness_mat = 1.4,
+
+  th_exp_coeff_mat = 10.95e-6, 11.0e-6, 11.22e-6, 11.38e-6, 11.55e-6, 11.73e-6, 11.90e-6, 12.07e-6, 12.23e-6, 12.38e-6, 12.55e-6, 12.73e-6, 12.91e-6, 13.04e-6, 13.04e-6,
+  th_exp_temp_mat = 0.0,      50.0,    100.0,    150.0,    200.0,    250.0,    300.0,    350.0,    400.0,    450.0,    500.0,    550.0,    600.0,   650.0,  700.0,
+
+  rho_mat = 5240.0,
+  cond_value_mat = 1.0, 1.0,
+  cond_temp_mat = 20.0, 1300.0,
+
+  creep_const_mat = 2.168e+05,
+  creep_activation_energy_mat = 3.923e+4,
+  creep_exponent_mat = 3.5,
+  Temp_creep_onset_mat = 400.0,
+
+ /

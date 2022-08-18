@@ -1,0 +1,24 @@
+ &PROPERTY
+ 
+  material_name = '(Fe,Cr)3O4',
+
+  Youngs_modul_mat = 6.0e+4, 6.0e+4,
+  Youngs_temp_mat = 10.0, 1000.0,
+  poisson_ratio_mat = 0.31,
+
+  surf_fracture_energy_mat = 4.5,
+  fracture_toughness_mat = 1.4,
+   
+  th_exp_coeff_mat = 10.570e-6, 10.800e-6, 11.143e-6, 11.600e-6, 11.714e-6, 12.400e-6, 13.257e-6, 14.571e-6, 16.229e-6, 17.886e-6, 18.920e-6, 18.800e-6, 17.657e-6, 17.143e-6, 17.143e-6,
+  th_exp_temp_mat = 0.0,      50.0,    100.0,    150.0,    200.0,    250.0,    300.0,    350.0,    400.0,    450.0,    500.0,    550.0,    600.0,   650.0, 700.0,
+
+  rho_mat = 5180.0,
+  cond_value_mat = 1.0, 1.0,
+  cond_temp_mat = 20.0, 1300.0,
+
+  creep_const_mat = 2.29248e+07 
+  creep_activation_energy_mat = 3.175367e+4,
+  creep_exponent_mat = 3.0,
+  Temp_creep_onset_mat = 400.0,
+
+ /

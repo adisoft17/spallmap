@@ -1,0 +1,18 @@
+&DAMAGE
+
+   flaw_oxide_size_factor = 0.2,
+   flaw_defect_factor = 1.0,
+
+   flaw_size_init = 1.0, 1.0, 1.0, 1.0, 6*0.0,
+   flaw_name = 'burried_crack', 'surface_crack', 'interface_crack', 'pore', 6*'none',
+
+   amplitude_roughness = 1.0e-1,
+   wavelength_roughness = 1.0,
+   delamination_size_existent = 600.0,
+   delamination_size_factor = -0.75,
+   separated_area = 1.0,
+
+   porosity_fraction = 1.0e-3,
+   number_cracks_volumetric = 4,
+
+/

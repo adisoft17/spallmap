@@ -1,0 +1,36 @@
+  thickness_spallation_map = 10.0, 510.0,
+  no_thick_spall_map = 35,
+  interval_type_thick_spall_map = 'log',
+  map_level = 1,
+
+  no_st_rad_points_tube = 25,
+  no_st_rad_points_oxide = 8,  
+
+  small_oxide_thickness = 1.0,
+  if_average_oxide = .false.
+  internal_htc = .false., 
+  external_htc = .true.,
+  new_oxide_creep_option = 'old',
+
+  generalized_plane_strain = .true.,
+  metal_recession_type = 'variable',
+
+  stress_eq_epsilon = 1.0e-6,
+  eps_oxide_grid = 1.0e-6,
+  update_sola_type = 0,
+
+  start_creep_cycles = 1,
+  ratio_time_first_pulse = 1.25,
+  no_first_pulse_creep_int = 50,
+
+  no_thick_interval = 20,
+  no_temp_strain = 10,
+
+  max_iterat_solver = 199,
+  dTemp_eps = 1.0e-1,
+
+  Temp_reference_tube = -20.0,
+  Temp_reference_oxide = -20.0,
+
+/ 
+
