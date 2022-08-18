@@ -1,0 +1,112 @@
+# -*-Mode: Makefile-*-
+#
+# determine environment, included in the TELLURIDE Makefile
+# sets variables:
+#    os
+#    os_ver
+#    arch
+#    compiler
+#    host
+#
+# if you can't get one of these from the OS, just assign something
+#
+# $Id: calorie.env,v 1.1.1.1 2002/04/22 15:39:44 uxn Exp $
+
+data = $(shell uname -a)
+
+# DEC
+ifeq (OSF1, $(findstring OSF1,$(data)))
+  os       = dunix
+  os_ver   = $(word 3, $(data))
+  arch     = $(word 5, $(data))
+  compiler = dec
+  host     = $(shell hostname | sed 's|\..*||')
+endif
+
+# Cray UNICOS
+ifeq (CRAY, $(findstring CRAY,$(data)))
+  os       = unicos
+  os_ver   = $(word 3, $(data))
+  arch     = cray
+  compiler = cray
+  host     = $(shell hostname | sed 's|\..*||')
+endif
+
+# SGI
+ifeq (IRIX, $(findstring IRIX,$(data)))
+  os       = irix
+  os_ver   = $(word 3, $(data))
+  arch     = $(shell uname -p)
+  compiler = sgi
+  host     = $(shell hostname | sed 's|\..*||')
+endif
+
+# Sun
+ifeq (SunOS, $(findstring SunOS,$(data)))
+  major_release = $(firstword $(subst .," ",$(data)))
+  ifeq ($(major_release),4)
+    os     = sunos
+    arch   = $(shell mach)
+  else
+    os     = solaris
+    arch   = $(word 6, $(data))
+  endif
+  os_ver   = $(word 3, $(data))
+# select only one
+  compiler = sun
+# compiler = cray
+# compiler = fujitsu
+  host     = $(shell hostname | sed 's|\..*||')
+endif
+
+# IBM
+ifeq (AIX, $(findstring AIX,$(data)))
+  os       = aix
+  major_release = $(word 4, $(data))
+  minor_release = $(word 3, $(data))
+  os_ver   = $(major_release).$(minor_release)
+  arch     = rs6k
+  compiler = ibm
+  host     = $(shell hostname | sed 's|\..*||')
+endif
+
+# HP
+ifeq (HP-UX, $(findstring HP-UX,$(data)))
+  os       = hpux
+  os_ver   = $(word 3, $(data))
+  arch     = pa-risc
+  compiler = hp
+  host     = $(shell hostname | sed 's|\..*||')
+endif
+
+# WNT/W95
+ifeq (CYGWIN32, $(findstring CYGWIN32,$(data)))
+  os       = win32
+  os_ver   = $(word 3, $(data))
+ifeq (86, $(findstring 86, $(word 5, $(data))))
+  arch     = intel
+endif
+  compiler = dec
+# compiler = lahey
+# compiler = msoft
+  host     = $(word 2, $(data))
+endif
+
+# LINUX
+ifeq (LINUX, $(findstring LINUX,$(data)))
+  os       = linux
+  os_ver   = $(word 3, $(data))
+  arch     = $(shell uname -p)
+  compiler = intel
+  host     = $(shell hostname | sed 's|\..*||')
+endif
+
+os       = linux
+os_ver   = $(word 3, $(data))
+arch     = $(shell uname -p)
+compiler = intel
+host     = $(shell hostname | sed 's|\..*||')
+
+ifeq ($(GUI),yes)
+  compiler = gui
+endif

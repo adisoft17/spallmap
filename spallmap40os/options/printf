@@ -1,0 +1,110 @@
+#!/bin/csh
+# 
+# THE FRIDAY HACK
+# 
+# "A Printf Shell Command"
+#  by Achut Reddy
+# 
+# 
+# A Printf Shell Command
+# 
+#     This issue's Hack is simple but practical. We're going to write 
+# a printf() function for the command line. It also is instructive 
+# because it illustrates two of the main principles of the Art of 
+# Hacking: conciseness and leverage.
+# 
+#     One of the first functions a new C programmer learns to use 
+# is printf() for doing formatted output. With it, one can format 
+# numbers and strings, specify field widths, specify left or right 
+# justification, etc.  However, there is nothing similar for the 
+# command line or shell scripts. Wouldn't it be neat to be able to 
+# do something like the following?
+# 
+# $ printf "System\t%s\nHost\t%s\nVersion\t%s\nRelease\t%s\n" `uname -snvr`
+# 
+# System  SunOS
+# 
+# Host	  sunpro
+# 
+# Version 5.0
+# 
+# Release 1
+# 
+#     Others have thought so as well, and somebody once posted to 
+# the net a 400-line C program which does just that! However, I 
+# believe that this "solution" violates two principles of hacking:
+# 
+#      1. Conciseness. A hack should be as concise as possible.
+# 
+#      2. Leverage. A hack should build upon previous hacks. Newton
+# 	  said, "If I have seen farther than others, it is because
+# 	  I have stood on the shoulders of giants." Newton
+# 	  understood the principle of leverage. 
+# 
+#      The leverage aspect of this column's solution involves 
+# noting that awk has a printf() as a built-in function. There is 
+# no reason to duplicate this functionality; it just needs to be 
+# made more accessible.
+# 
+#      To achieve conciseness, we will use nawk (enhanced version 
+# of awk). The csh script in Figure 1 does essentially the same 
+# thing as that 400-line C program, but in only 11 lines.
+# 
+#      To use this version, store the script in a file called 
+# "printf" and make it executable (chmod +x printf).
+# 
+#      But we can do better still by using ksh (Korn Shell) since 
+# ksh supports very fast user-defined functions (since they are 
+# kept in memory). Figure 2 gives a ksh function to do the same 
+# thing in only six lines! If you are a beginner at ksh programming, 
+# it is instructive to study these six lines and determine exactly 
+# what they do.
+# 
+#      To use this version, run ksh and type this function at the 
+# command line. Better yet, put it in your .profile or ENV file.
+# 
+#      The arguments to printf should be separated by spaces. The 
+# ksh version has the advantage of also allowing separation by 
+# commas, as long as you also have a space after the comma.
+# 
+# Whichever version you use, try it out on the following examples 
+# for fun:
+# 
+#      printf 'Today is %s, %s, %d!\n' `date +"%a %h %d"`
+# 
+#      printf 'Pi = %6.4f, Avogadro # = %8.2e\n' 3.14159265
+# 	 602000000000000000000000
+# 
+#      printf 'The ASCII value of octal(132) is: \132.\n'
+# 
+# *Achut Reddy is a Staff Engineer in the Integrated Programming
+#  Environments group at SunPro. He can be reached at
+#  achut@eng.sun.com.
+# 
+# 
+# Figure 1. printf as a csh script 
+#
+# (Note: I made lots of changes to the quoting, which the editors
+#  apparently botched badly. He also screwed up the if test, which
+#  should be fixed now. -MLH)
+# 
+# #!/bin/csh
+if ($#argv == 0) then
+  echo "usage: $0 <format> [arg1 ...]"
+  exit
+endif
+set fmt="$argv[1]"; shift; set args=
+foreach a ($argv[*])
+  set args=${args},\"$a\"
+end
+gawk 'BEGIN { printf "'${fmt:q}'" '$args'}'
+# 
+# Figure 2. printf as a ksh function
+# 
+# printf() {
+#  [ $# -lt 1 ] && echo "usage: $0 <format> [arg1 ...]" && return
+#  typeset a args fmt=${1%,}; shift
+#  for a in "$@"; do args="$args,\"${a%,}\""; done
+#  nawk "BEGIN { printf \"$fmt\" $args }"
+# }
+

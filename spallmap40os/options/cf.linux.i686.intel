@@ -1,0 +1,208 @@
+# -*-Mode: Makefile-*-
+#
+#         Compile flags used in the TELLURIDE GNUmakefile
+#                that are SPECIFIC to WindowsNT
+# 
+# $Id: cf.win32.intel.dec,v 1.1.1.1 2002/04/22 15:39:44 uxn Exp $
+#
+# This listing of TELLURIDE compile flags is included in the GNUmakefile
+# ONLY if the executable is to run under WindowsNT.  The compile flags include
+# those for the C pre-processor, the Fortran 90 compiler, and the C
+# compiler.  
+#
+# These flags are currently all wrong, unless we get DECs compiler for WNT!
+#
+# Certain aspects of the format of this file must be rigidly followed
+# so that the GUI can parse it correctly.  These are detailed below.
+#
+# o Lines that should be passed straight to the makefile.  Examples are
+#   the suffix used by the compiler for list and module information files,
+#   paths to module information files, etc.
+#
+#  - A single comment line of the form:
+#
+#    # Verbatim: Comment
+#
+#    The comment string is not used by the GUI and can be anything.
+#
+#  - A single blank line.
+#
+#  - Any number of lines, followed by a blank line.  These lines are
+#    read by the GUI and passed straight to the makefile fragment included
+#    by GNUmakefile.
+#
+# o Compile flags that are toggled must be defined as follows:
+#
+#  - A single comment line of the form:
+#
+#    # Flag: Description
+#
+#    "Description" is a brief description of what the flag controls,
+#    for example "Enable profiling with prof" (omit the quotes).
+#    This string is displayed in a popup in the GUI when setting compile
+#    flags.
+#
+#  - A single blank line.
+#
+#  - A line of the form:
+#
+#    FFLAGS += -flag1 -flag2
+#
+#    If the flag is to be off by default, add a comment character (#)
+#    immediately in front of the word FFLAGS (NO space must appear 
+#    between # and FFLAGS).
+#
+#    Some flags for some compilers are of the form "-flag value".  This
+#    is fine.
+#
+# o Some compile flags, such as optimization level, may have several
+#   allowable values.  These are placed into a menu in the GUI and must
+#   be defined slightly differently in this file:
+#
+#  - A single comment line of the form:
+#
+#    # Menu: Description
+#
+#    Again "Description" is a brief description of what the flags in
+#    this menu will control, for example "Debugging/Optimization".
+#    However, in this case only the first word will be used by the GUI.
+#    It becomes the menu name.  So for example you could not have used
+#    "Debugging / Optimization" in this example, as only "Debugging"
+#    would have been used.
+#
+#  - A single blank line.
+#
+#  - A series of lines of the form:
+#
+#    FFLAGS += -flag
+#
+#    one for each appropriate value.  There must be no blank lines
+#    between the lines, and the final value must be followed by a
+#    blank line.  Since the values are assumed to be mutually-exclusive,
+#    at most one of the lines of values must be uncommented.  The
+#    remainder must be commented-out as described above.
+
+# =-=-=-=-=-=-=-=-=-=-=-= Fortran Compiler Flags =-=-=-=-=-=-=-=-=-=-=-=
+
+# Command to invoke compiler.
+
+FC = ifort 
+
+# Command to invoke the linker
+
+FL = ifort -Wl,--rpath,/home2/uxn/syngate_backup/src/solver/solver_lib
+
+# Verbatim: Suffix used for listings.
+
+list = l
+
+# Verbatim: Suffix used for module information files.
+
+mif = mod
+
+# Verbatim: Define location of TELLURIDE modules
+
+#FFLAGS += -I$(dot)/$(tmpdir)
+FFLAGS += -I.
+
+# Verbatim: Define location of lapack libraries
+#FFLAGS += -L/home2/uxn/syngate_backup/src/solver/solver_lib
+# blas and lapack routines
+#FFLAGS += -lblas1
+#FFLAGS += -L/home2/uxn/syngate_backup/src/solver/solver_lib
+#FFLAGS += -lblas2
+#FFLAGS += -L/home2/uxn/syngate_backup/src/solver/solver_lib
+#FFLAGS += -lblas3
+#FFLAGS += -L/home2/uxn/syngate_backup/src/solver/solver_lib
+#FFLAGS += -llapack
+#FFLAGS += /home2/uxn/syngate_backup/src/solver/solver_lib/libblas1.a
+#FFLAGS += /home2/uxn/syngate_backup/src/solver/solver_lib/libblas2.a
+#FFLAGS += /home2/uxn/syngate_backup/src/solver/solver_lib/libblas3.a
+#FFLAGS += /home2/uxn/syngate_backup/src/solver/solver_lib/liblapack.a
+
+# Verbatim: Define location of JTpack90 modules
+#FFLAGS += -I$(JTPACK_MOD_DIR)
+
+# Flag: Issue warnings for non-standard constructs
+
+FFLAGS += -std
+
+# Flag: Extend single precision constants to double
+
+FFLAGS += -fpconstant -r8
+
+# Flag: Link with static libraries instead of shared
+# not supported on linux
+#FFLAGS += -non_shared
+
+# Menu: Stack/Static (for local variables)
+
+#FFLAGS += -automatic
+FFLAGS += -static
+
+# Flag: Generate listing
+
+#FFLAGS += -V
+
+# Flag: Generate FUSE cross references
+# not supported on linux
+#FFLAGS += -fuse_xref
+
+# Menu: Debugging
+
+#FFLAGS += -g1
+#FFLAGS += -g2
+#FFLAGS += -g3
+FFLAGS += -g
+FFLAGS += -traceback
+FFLAGS += -debug
+
+# Menu: Optimization
+
+FFLAGS += -O0
+#FFLAGS += -O1
+#FFLAGS += -O2
+#FFLAGS += -O3
+#FFLAGS += -O4
+#FFLAGS += -O5
+
+# Menu: Speculate
+# not supported on linux
+#FFLAGS += -speculate none
+#FFLAGS += -speculate by_routine
+#FFLAGS += -speculate all
+
+# Flag: Generate core file on floating-point exception
+# not supported on linux
+#FFLAGS += -fpe0 -synchronous_exceptions
+FFLAGS += -fpe0
+
+# Flag: Include information for decladebug debugger
+# error for ORNL linux cluster
+#FFLAGS += -ladebug
+
+# Flag: Enable array bounds checking
+
+FFLAGS += -check_bounds
+
+# Flag: Enable profiling
+
+#FFLAGS += -pg
+
+# =-=-=-=-=-=-=-=-=-=-=-= Fortran Compiler Flags =-=-=-=-=-=-=-=-=-=-=-=
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-= C Compiler Flags =-=-=-=-=-=-=-=-=-=-=-=-=
+
+# Compiler type
+CC = gcc
+
+# Optimize
+# CFLAGS += -O
+
+# Enable debugging
+CFLAGS += -g
+
+# Enable verbose compilation comments
+# CFLAGS += -v
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-= C Compiler Flags =-=-=-=-=-=-=-=-=-=-=-=-=

@@ -1,0 +1,198 @@
+# -*-Mode: Makefile-*-
+#
+#         Compile flags used in the TELLURIDE GNUmakefile
+#                that are SPECIFIC to the Sun
+# 
+
+# $Id: cf.solaris.sparc.sun,v 1.1.1.1 2002/04/22 15:39:44 uxn Exp $
+
+# This listing of TELLURIDE compile flags is included in the GNUmakefile
+# ONLY if the executable is to be compiled with the SunSoft F90 compiler.
+
+# Certain aspects of the format of this file must be rigidly followed
+# so that the GUI can parse it correctly.  These are detailed below.
+#
+# o Lines that should be passed straight to the makefile.  Examples are
+#   the suffix used by the compiler for list and module information files,
+#   paths to module information files, etc.
+#
+#  - A single comment line of the form:
+#
+#    # Verbatim: Comment
+#
+#    The comment string is not used by the GUI and can be anything.
+#
+#  - A single blank line.
+#
+#  - Any number of lines, followed by a blank line.  These lines are
+#    read by the GUI and passed straight to the makefile fragment included
+#    by GNUmakefile.
+#
+# o Compile flags that are toggled must be defined as follows:
+#
+#  - A single comment line of the form:
+#
+#    # Flag: Description
+#
+#    "Description" is a brief description of what the flag controls,
+#    for example "Enable profiling with prof" (omit the quotes).
+#    This string is displayed in a popup in the GUI when setting compile
+#    flags.
+#
+#  - A single blank line.
+#
+#  - A line of the form:
+#
+#    FFLAGS += -flag1 -flag2
+#
+#    If the flag is to be off by default, add a comment character (#)
+#    immediately in front of the word FFLAGS (NO space must appear 
+#    between # and FFLAGS).
+#
+#    Some flags for some compilers are of the form "-flag value".  This
+#    is fine.
+#
+# o Some compile flags, such as optimization level, may have several
+#   allowable values.  These are placed into a menu in the GUI and must
+#   be defined slightly differently in this file:
+#
+#  - A single comment line of the form:
+#
+#    # Menu: Description
+#
+#    Again "Description" is a brief description of what the flags in
+#    this menu will control, for example "Debugging/Optimization".
+#    However, in this case only the first word will be used by the GUI.
+#    It becomes the menu name.  So for example you could not have used
+#    "Debugging / Optimization" in this example, as only "Debugging"
+#    would have been used.
+#
+#  - A single blank line.
+#
+#  - A series of lines of the form:
+#
+#    FFLAGS += -flag
+#
+#    one for each appropriate value.  There must be no blank lines
+#    between the lines, and the final value must be followed by a
+#    blank line.  Since the values are assumed to be mutually-exclusive,
+#    at most one of the lines of values must be uncommented.  The
+#    remainder must be commented-out as described above.
+
+# =-=-=-=-=-=-=-=-=-=-=-= Fortran Compiler Flags =-=-=-=-=-=-=-=-=-=-=-=
+
+
+# Command to invoke compiler.
+
+FC = f90
+
+# Command to invoke the linker
+
+FL = f90
+
+# Verbatim: Suffix used for listings.
+
+list = lst
+
+# Verbatim: Suffix used for module information files.
+
+mif = M
+
+# Verbatim: Define location of modules
+
+FFLAGS += -M$(dot)/$(tmpdir)
+
+# Verbatim: Define location of JTpack90 modules.
+
+FFLAGS += -M$(JTPACK_MOD_DIR)
+
+# Verbatim: Define location of PGSLIB modules
+
+FFLAGS += -M$(PGSLIB_MOD_DIR)
+
+# Flag: Identify many non-ANSI extensions
+
+#FFLAGS += -ansi
+
+# Flag: Use static binding
+
+#FFLAGS += -Bstatic
+
+# Flag: Generate double load/store instructions (OK with debug)
+
+FFLAGS += -dalign
+
+# Flag: Use nonstandard arithmetic (OK with debug)
+
+FFLAGS += -fnonstd
+
+# Flag: Compile for native environment (OK with debug)
+
+FFLAGS += -native
+
+# Menu: Debugging/Optimization
+
+FFLAGS += -g
+#FFLAGS += -O1
+#FFLAGS += -O2
+#FFLAGS += -O3
+
+# Menu: UltraSPARC Optimization
+#FFLAGS += -fast
+#FFLAGS += -x04
+#FFLAGS += -xdepend
+#FFLAGS += -xchip=ultra
+#FFLAGS += -xarch=generic
+
+# Flag: Enable profiling with prof
+
+#FFLAGS += -p
+
+# Flag: Enable profiling with gprof
+
+#FFLAGS += -pg
+
+# Flag: Produce table information for the SourceBrowser
+
+#FFLAGS += -sb
+
+# Flag: Report execution times for the various compilation passes
+
+#FFLAGS += -time
+
+# Flag: Enable verbose compilation comments
+
+#FFLAGS += -v
+
+# Flag: Use fast math libs (OK with debug)
+
+FFLAGS += -xlibmopt
+
+# Flag: Make a cross-reference and line-numbered listing of the source files
+
+#FFLAGS += -Xlist
+
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-= C Compiler Flags =-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+# Compiler type
+
+CC = cc
+
+# Optimize
+
+#CFLAGS += -O
+
+# Enable debugging
+
+CFLAGS += -g
+
+# Enable profiling
+#CFLAGS += -pg
+
+# Enable verbose compilation comments
+
+CFLAGS += -v
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-= C Compiler Flags =-=-=-=-=-=-=-=-=-=-=-=-=

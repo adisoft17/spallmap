@@ -1,0 +1,20 @@
+# -*-Mode: Makefile-*-
+#
+#  additional libraries used in the TELLURIDE GNUmakefile
+#
+#
+# This listing of libraries is included in the GNUmakefile and loaded
+# in with all other default libraries upon TELLURIDE compilation.
+# It defines any additional libraries that are used in TELLURIDE.
+#
+# ========== library and module paths ==========
+
+USER_LIBS += -L/home2/uxn/syngate_backup/src/solver/solver_lib
+USER_LIBS += -lblas1
+#USER_LIBS += -L/home2/uxn/syngate_backup/src/solver/solver_lib
+USER_LIBS += -lblas2
+#USER_LIBS += -L/home2/uxn/syngate_backup/src/solver/solver_lib
+USER_LIBS += -lblas3
+#USER_LIBS += -L/home2/uxn/syngate_backup/src/solver/solver_lib
+USER_LIBS += -llapack
+

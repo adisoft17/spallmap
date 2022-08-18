@@ -1,0 +1,14 @@
+input_utilities_module.f90(45): warning #7416: Fortran 2003 does not allow this intrinsic procedure.   [IARGC]                                                  
+          n = IARGC()                                                           
+--------------^                                                                 
+input_utilities_module.f90(46): warning #7416: Fortran 2003 does not allow this intrinsic procedure.   [GETARG]                                                 
+          if (n > 0) call GETARG (1, prefix)                                    
+--------------------------^                                             
+
+warning #5268: Extension to standard: The text exceeds right hand column allowed on the line.                                            
+      !       /        \           /              !      /          \         /                !     /            \       /                  ! -- 1              4-----5              8------                                                   
+------------------------------------------------------------------------------------------------------------------------------------^                           
+
+ifort: command line warning #10156: ignoring option '-c'; no argument required
+ld: cannot find -lblas1
+

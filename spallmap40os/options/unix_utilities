@@ -1,0 +1,49 @@
+# -*-Mode: Makefile-*-
+#
+#   Definitions of UNIX utilities used in the TELLURIDE GNUmakefile
+#
+# $Id: unix_utilities,v 1.1.1.1 2002/04/22 15:39:44 uxn Exp $
+
+# utility and flag definitions
+AR        = ar
+ARFLAGS   = cr
+AWK       = gawk
+BASENAME  = basename
+CAT       = cat
+CC        = cc
+CD        = cd
+COMPRESS  = gzip
+COMPRESS_SUFFIX = gz
+CP        = cp
+ifeq ($(os),UNICOS)
+  CPP     = cpp
+else
+  CPP     = gcc -traditional -E
+endif
+DIFF      = diff
+ECHO      = echo
+GREP      = grep
+LN        = ln -s
+MAKE      = gmake
+MKDIR     = mkdir
+MV        = mv
+# only define ranlib on BSD like systems
+ifneq ($(os),irix)
+   ifneq ($(os),UNICOS)
+      ifneq ($(os),Solaris)
+         ifneq ($(os),linux)
+	RANLIB = ranlib
+         endif
+      endif
+   endif
+endif
+RM        = rm
+RMFLAGS   = -f
+SED       = sed
+SORT      = sort
+SORTFLAGS = -u
+TAR       = tar
+TARFLAGS  = cvf 
+TOUCH     = touch
+WC        = wc
+WCFLAGS   = -l 

@@ -1,0 +1,69 @@
+#! /bin/csh -f
+#
+# Filename: linesofcode
+# Author:   Michael L. Hall
+#
+# This script determines the number of lines of code and comments in
+# a Fortran (F77 or F90) file.
+#
+# Usage:
+#
+#   % linesofcode <filename> [<filename> etc.]
+#
+# Note: this program needs the printf script.
+#
+# Known bugs: The F90 "contains" statement is treated as a comment.
+#
+# Version:  0.8
+# Date:     08/05/96, 19:25:06
+#
+# Print header.
+#
+echo "Filename                                    Code      Comments  Commented  Total"
+echo "                                                                  Code"
+#
+# Loop over filenames.
+#
+@ totsum = 0
+@ comsum = 0
+@ codesum = 0
+@ comcsum = 0
+foreach file ($*)
+#
+# Count lines.
+#
+  @ total = `cat $file | wc -l`
+  @ comments = `egrep '(^[cC]|\\!|^ *$)' $file | wc -l`
+  @ code = `egrep -v '(^[cC]|^ *\\!|^ *$)' $file | wc -l`
+  @ comcode = `egrep -v '(^[cC]|^ *\\!|^ *$)' $file | grep \! | wc -l`
+#
+# Calculate percentages.
+#
+  @ codep = (100 * $code) / $total
+  @ comp = (100 * $comments) / $total
+  @ comcp = (100 * $comcode) / $total
+#
+# Output info on this file.
+#
+  printf '%-39s%6d (%2d%%)%6d (%2d%%)%5d (%2d%%)%6d\n' \
+    $file $code $codep $comments $comp $comcode $comcp $total
+#
+# Increment sums.
+#
+  @ totsum = $totsum + $total
+  @ comsum = $comsum + $comments
+  @ codesum = $codesum + $code
+  @ comcsum = $comcsum + $comcode
+end
+#
+# Output total if more than one file.
+#
+if ($totsum != $total) then
+  @ codep = (100 * $codesum) / $totsum
+  @ comp = (100 * $comsum) / $totsum
+  @ comcp = (100 * $comcsum) / $totsum
+  printf '%-39s%6d (%2d%%)%6d (%2d%%)%5d (%2d%%)%6d\n' \
+    'Total' $codesum $codep $comsum $comp $comcsum $comcp $totsum
+endif
+
+
