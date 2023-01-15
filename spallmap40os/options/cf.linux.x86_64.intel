@@ -188,7 +188,7 @@ FFLAGS += -fpe0
 # Flag: Enable array bounds checking; ifort "-check bounds"
 
 #FFLAGS += -check_bounds
-#FFLAGS += -check bounds
+FFLAGS += -check bounds
 
 # Flag: Enable profiling
 
