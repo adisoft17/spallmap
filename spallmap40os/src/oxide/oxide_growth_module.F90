@@ -52,7 +52,7 @@ MODULE OXIDE_GROWTH_MODULE
     logical  :: one_check
 
     ! units are in microns
-    ALLOCATE(oxide_thickness(1:TEMP_BOILER_data_no), STAT = Status)
+    ALLOCATE(oxide_thickness(1:TEMP_BOILER_data_no + 5), STAT = Status)
 
     ! for metal only do not obtain the oxide thickness
     if (no_oxide_layers == 1)  RETURN
@@ -193,7 +193,7 @@ MODULE OXIDE_GROWTH_MODULE
         ! temp profile for two layers (metal + one oxide layer)
         call TEMP_PROFILE(no_oxide_layers, Temp_gas_p(j), Temp_steam_p(j), &
            & thickness_layer, j, Time_Boiler_p(j), &
-           & Time_Boiler_p(j) - Time_Boiler_p(j), 3, if_average_oxide)  ! do not assign high or low temperature
+           & Time_Boiler_p(j) - Time_Boiler_p(j), 1, if_average_oxide)  ! do not assign high or low temperature
         Temp_dummy(j) = Temp(no_oxide_layers, npr_temp(no_oxide_layers))
 
       end do
@@ -258,7 +258,7 @@ MODULE OXIDE_GROWTH_MODULE
     logical  :: one_check
 
     ! units are in microns
-    ALLOCATE(oxide_thickness(1:TEMP_BOILER_data_no), STAT = Status)
+    ALLOCATE(oxide_thickness(1:TEMP_BOILER_data_no + 5), STAT = Status)
 
     ! for metal only do not obtain the oxide thickness
     if (no_oxide_layers == 1)  then
@@ -434,7 +434,7 @@ MODULE OXIDE_GROWTH_MODULE
         ! temp profile for two layers (metal + one oxide layer)
         call TEMP_PROFILE(no_oxide_layers, Temp_gas_p(j), &
           & Temp_steam_p(j), thickness_layer, j, Time_Boiler_p(j), &
-          & Time_Boiler_p(j) - Time_Boiler_p(j), 3, if_average_oxide)  
+          & Time_Boiler_p(j) - Time_Boiler_p(j), 1, if_average_oxide)  
 
         ! get the growth temperature
         call GET_GROWTH_TEMP(no_oxide_layers, Temp_steam_p(j), &

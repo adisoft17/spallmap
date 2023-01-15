@@ -185,7 +185,6 @@ MODULE OXIDE_UTILITY_MODULE
   ! N = total number of layers; minimum 2 (substrate + average scale)
 
   ! Poisson ratio is not temperature dependent
-  poisson = poisson_ratio
 
   ! ignore the variation with temperature for the Youngs modulus
   Youngs(1) = Youngs_modul(1, 1)
@@ -1963,7 +1962,7 @@ MODULE OXIDE_UTILITY_MODULE
   logical, intent(IN)  :: if_ave_scale, if_new_output
 
     ! Local Variables
-    integer  :: j, step_cycle, nstart, m, i, k
+    integer  :: j, step_cycle, nstart, m, i, k, no_print_event_header
     real     :: Temp_High, Temp_Low, dtime_f2l_now, &
               & Press_gas_now, Press_steam_now, slope_time, &
               & slope_temp_gas, slope_temp_steam, slope_press_gas, &
@@ -2315,16 +2314,25 @@ MODULE OXIDE_UTILITY_MODULE
          !   & ' uel'//ch_index(j)//'_sp'//&
          !   & ' eh'//ch_index(j)//'_sp_ave', &
          !   & ' uel'//ch_index(j)//'_mag',&
-         !   & ' eh'//ch_index(j)//'_mag_ave', j = 1, no_f2l_event_out) 
+         !   & ' eh'//ch_index(j)//'_mag_ave', j = 1, no_f2l_event_out)
+          
+         ! print only the first 9; all the others will be the same
+         ! to avoid ch_index(j>=10)
+         if (no_f2l_event_out <= 9)  then
+           no_print_event_header = no_f2l_event_out
+         else
+           no_print_event_header = 9
+         endif
+
          if (N == 2) then  ! one-oxide layer
 
            write(f2l_lun, 91) (' T'//ch_index(j)//'_ox_met', &
             & ' uel'//ch_index(j)//'_tot'// &
-            & ' eh'//ch_index(j)//'_tot', j = 1, no_f2l_event_out)
+            & ' eh'//ch_index(j)//'_tot', j = 1, no_print_event_header) ! no_f2l_event_out)
 
            write(f2l_pl_lun, 91) (' T'//ch_index(j)//'_ox_met', &
             & ' uel'//ch_index(j)//'_tot'// &
-            & ' eh'//ch_index(j)//'_tot', j = 1, no_f2l_event_out)
+            & ' eh'//ch_index(j)//'_tot', j = 1, no_print_event_header) ! no_f2l_event_out)
 
          else if (N == 3) then  ! two-oxide layers 
 
@@ -2333,14 +2341,14 @@ MODULE OXIDE_UTILITY_MODULE
             & ' uel'//ch_index(j)//'_sp'//&
             & ' eh'//ch_index(j)//'_sp_ave', &
             & ' uel'//ch_index(j)//'_mag',&
-            & ' eh'//ch_index(j)//'_mag_ave', j = 1, no_f2l_event_out) 
+            & ' eh'//ch_index(j)//'_mag_ave', j = 1, no_print_event_header) ! no_f2l_event_out) 
 
            write(f2l_pl_lun, 91) (' T'//ch_index(j)//'_ox_met', &
             & ' uel'//ch_index(j)//'_tot'// &
             & ' uel'//ch_index(j)//'_sp'//&
             & ' eh'//ch_index(j)//'_sp_ave', &
             & ' uel'//ch_index(j)//'_mag',&
-            & ' eh'//ch_index(j)//'_mag_ave', j = 1, no_f2l_event_out) 
+            & ' eh'//ch_index(j)//'_mag_ave', j = 1, no_print_event_header) ! no_f2l_event_out) 
 
          else if (N == 4)  then  ! three oxide layers
 
@@ -2353,7 +2361,7 @@ MODULE OXIDE_UTILITY_MODULE
             & ' uel'//ch_index(j)//'_maghe',&
             & ' eh'//ch_index(j)//'_maghe_ave', &
             & ' uel'//ch_index(j)//'_mag23he',&
-            & ' eh'//ch_index(j)//'_mag23he_ave', j = 1, no_f2l_event_out) 
+            & ' eh'//ch_index(j)//'_mag23he_ave', j = 1, no_print_event_header) ! no_f2l_event_out) 
 
            write(f2l_pl_lun, 91) (' T'//ch_index(j)//'_ox_met', &
             & ' uel'//ch_index(j)//'_tot'// &
@@ -2364,7 +2372,7 @@ MODULE OXIDE_UTILITY_MODULE
             & ' uel'//ch_index(j)//'_maghe',&
             & ' eh'//ch_index(j)//'_maghe_ave', &
             & ' uel'//ch_index(j)//'_mag23he',&
-            & ' eh'//ch_index(j)//'_mag23he_ave', j = 1, no_f2l_event_out) 
+            & ' eh'//ch_index(j)//'_mag23he_ave', j = 1, no_print_event_header) ! no_f2l_event_out) 
 
          endif
  91      format(' time', 150(a))

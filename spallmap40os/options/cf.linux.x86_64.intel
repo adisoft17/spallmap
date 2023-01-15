@@ -185,9 +185,10 @@ FFLAGS += -fpe0
 # error for ORNL linux cluster
 #FFLAGS += -ladebug
 
-# Flag: Enable array bounds checking
+# Flag: Enable array bounds checking; ifort "-check bounds"
 
-FFLAGS += -check_bounds
+#FFLAGS += -check_bounds
+#FFLAGS += -check bounds
 
 # Flag: Enable profiling
 

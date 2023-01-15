@@ -1,4 +1,4 @@
-The SPALLation MAP (SPALLMAP) code contains modules developed for oxide growth and oxide exfoliation
+The SPALLation MAP (SPALLMAP) code contains modules developed for oxide growth and oxide exfoliation. Copyright 2018 UT-Battelle LLC. All rights reserved.
 
 SpallMap solves for the stress-strain equations in an axisymmetric geometry, tracking the stress/strain evolution during boiler operation including outages at one-location along a boiler tube and compares it with scale damage criteria represented by Armitt diagram. 
 
